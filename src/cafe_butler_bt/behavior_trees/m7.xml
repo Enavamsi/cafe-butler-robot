@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<root BTCPP_format="4">
+  <BehaviorTree ID="Milestone7">
+    <Sequence>
+      <PublishFeedback state="MOVING_TO_KITCHEN"/>
+      <NavigateToWaypoint waypoint="kitchen"/>
+      <ForEachTable>
+        <Fallback>
+          <Sequence>
+            <Inverter><IsTableCancelled table="{current_table}"/></Inverter>
+            <PublishFeedback state="MOVING_TO_TABLE"/>
+            <NavigateToWaypoint waypoint="{current_table}"/>
+            <PublishFeedback state="DELIVERED"/>
+          </Sequence>
+          <AlwaysFailure/>
+        </Fallback>
+      </ForEachTable>
+      <PublishFeedback state="RETURNING_VIA_KITCHEN"/>
+      <NavigateToWaypoint waypoint="kitchen"/>
+      <PublishFeedback state="RETURNING_HOME"/>
+      <NavigateToWaypoint waypoint="home"/>
+    </Sequence>
+  </BehaviorTree>
+</root>

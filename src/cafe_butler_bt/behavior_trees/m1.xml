@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<root BTCPP_format="4">
+  <BehaviorTree ID="Milestone1">
+    <Sequence>
+      <PublishFeedback state="MOVING_TO_KITCHEN"/>
+      <NavigateToWaypoint waypoint="kitchen"/>
+      <PublishFeedback state="MOVING_TO_TABLE"/>
+      <NavigateToWaypoint waypoint="{current_table}"/>
+      <PublishFeedback state="DELIVERED"/>
+      <PublishFeedback state="RETURNING_HOME"/>
+      <NavigateToWaypoint waypoint="home"/>
+    </Sequence>
+  </BehaviorTree>
+</root>

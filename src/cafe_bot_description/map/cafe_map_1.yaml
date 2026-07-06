@@ -1,0 +1,7 @@
+image: /home/ena_vamsi/cafe_ros2_ws/cafe_bot_description/map/cafe_map_1.pgm  
+mode: trinary
+resolution: 0.05
+origin: [-11.8, -4.73, 0]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.25

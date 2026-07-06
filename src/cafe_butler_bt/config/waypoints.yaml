@@ -1,0 +1,19 @@
+butler_bt_navigator:
+  ros__parameters:
+    waypoint_names: ["home", "kitchen", "table1", "table2", "table3"]
+    waypoints:
+      home:
+        position: [-10.49, 5.72]
+        orientation: [0.0, 0.0, 8.1, 0.9]    
+      kitchen:
+        position: [-4.6, 1.22]
+        orientation: [0.0, 0.0, 0.69, 0.71]
+      table1:
+        position: [3.6, 2.0]
+        orientation: [0.0, 0.0, 0.7, 0.7]
+      table2:
+        position: [-0.1, -2.2]
+        orientation: [0.0, 0.0, -0.022, 0.99]
+      table3:
+        position: [8.8, -0.04]
+        orientation: [0.0, 0.0, -0.7, 0.7]

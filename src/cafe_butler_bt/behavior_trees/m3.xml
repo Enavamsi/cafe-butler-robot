@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<root BTCPP_format="4">
+  <BehaviorTree ID="Milestone3">
+    <Sequence>
+      <PublishFeedback state="MOVING_TO_KITCHEN"/>
+      <NavigateToWaypoint waypoint="kitchen"/>
+      <Fallback>
+        <Sequence>
+          <PublishFeedback state="WAITING_KITCHEN_CONFIRM"/>
+          <WaitForConfirmation location="kitchen" timeout="15.0"/>
+          <PublishFeedback state="MOVING_TO_TABLE"/>
+          <NavigateToWaypoint waypoint="{current_table}"/>
+          <Fallback>
+            <Sequence>
+              <PublishFeedback state="WAITING_TABLE_CONFIRM"/>
+              <WaitForConfirmation location="{current_table}" timeout="15.0"/>
+              <PublishFeedback state="DELIVERED"/>
+            </Sequence>
+            <Sequence>
+              <PublishFeedback state="TABLE_TIMEOUT_RETURN_VIA_KITCHEN"/>
+              <NavigateToWaypoint waypoint="kitchen"/>
+            </Sequence>
+          </Fallback>
+        </Sequence>
+        <PublishFeedback state="KITCHEN_TIMEOUT_RETURN_HOME"/>
+      </Fallback>
+      <PublishFeedback state="RETURNING_HOME"/>
+      <NavigateToWaypoint waypoint="home"/>
+    </Sequence>
+  </BehaviorTree>
+</root>
