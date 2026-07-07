@@ -282,6 +282,4 @@ branch of the tree fired.
 - Nav2's own bringup (AMCL, planner, controller) is assumed to already be
   running with a saved map; it isn't launched by `cafe_butler_bt` itself.
 
-## License
 
-Add your preferred license here (e.g. Apache-2.0 / MIT) before publishing.
