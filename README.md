@@ -1,4 +1,4 @@
-# Café Butler Robot
+# Cafe Butler Robot
 
 A ROS2 + Nav2 + Behavior Tree implementation of a café delivery robot, built for the
 Goat Robotics ROS Developer assessment. The robot collects orders from the kitchen
