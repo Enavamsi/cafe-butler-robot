@@ -1,7 +1,6 @@
 #include <rclcpp/rclcpp.hpp>
 #include <rclcpp_action/rclcpp_action.hpp>
 #include <behaviortree_cpp/bt_factory.h>
-#include <behaviortree_cpp/loggers/groot2_publisher.h>
 
 #include "cafe_butler_interfaces/action/order_task.hpp"
 #include "cafe_butler_bt/bt_nodes.hpp"

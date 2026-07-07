@@ -1,4 +1,5 @@
 #pragma once
+#include <future>
 #include <behaviortree_cpp/bt_factory.h>
 #include <rclcpp/rclcpp.hpp>
 #include <rclcpp_action/rclcpp_action.hpp>
@@ -10,12 +11,7 @@
 namespace cafe_butler_bt
 {
 
-// ---------------------------------------------------------------------------
-// NavigateToWaypoint  (generic: works for "home", "kitchen", "table1", ...)
-// Sends a NavigateToPose goal to Nav2 for the named waypoint and waits for
-// the robot to arrive. This is the ONLY node that talks to Nav2, so every
-// milestone reuses it unmodified.
-// ---------------------------------------------------------------------------
+
 class NavigateToWaypoint : public BT::StatefulActionNode
 {
 public:
@@ -45,11 +41,7 @@ private:
   bool goal_success_{false};
 };
 
-// ---------------------------------------------------------------------------
-// WaitForConfirmation  (generic: works for "kitchen" or any "tableN")
-// Polls OrderTracker until someone confirms at `location`, or `timeout`
-// seconds pass. SUCCESS = confirmed, FAILURE = timed out.
-// ---------------------------------------------------------------------------
+
 class WaitForConfirmation : public BT::StatefulActionNode
 {
 public:
@@ -74,9 +66,7 @@ private:
   std::string location_;
 };
 
-// ---------------------------------------------------------------------------
-// IsTableCancelled  -- SUCCESS if the table (or whole order) was cancelled
-// ---------------------------------------------------------------------------
+
 class IsTableCancelled : public BT::ConditionNode
 {
 public:
@@ -95,17 +85,7 @@ private:
   std::shared_ptr<OrderTracker> tracker_;
 };
 
-// ---------------------------------------------------------------------------
-// ForEachTable  -- generic control node.
-// Iterates the "tables_queue" (std::vector<std::string>) stored on the
-// blackboard, one element at a time, exposing the active one as
-// "current_table". Ticks its single child once per table.
-//   child == SUCCESS -> table recorded as delivered, advance
-//   child == FAILURE -> table recorded as skipped,   advance
-//   child == RUNNING -> propagate RUNNING, don't advance
-// Returns SUCCESS once the queue is empty (this is what makes milestones
-// 5/6/7 "generic": 1 table or N tables run through the exact same node).
-// ---------------------------------------------------------------------------
+
 class ForEachTable : public BT::ControlNode
 {
 public:
@@ -124,10 +104,7 @@ private:
   bool child_started_{false};
 };
 
-// ---------------------------------------------------------------------------
-// PublishFeedback  -- forwards a state string to the action server feedback
-// (looked up from the blackboard as a std::function set up by the executor)
-// ---------------------------------------------------------------------------
+
 class PublishFeedback : public BT::SyncActionNode
 {
 public:
@@ -141,14 +118,11 @@ public:
   BT::NodeStatus tick() override;
 };
 
-// Registers every node above with the factory, wiring in the shared ROS
-// resources (node handle, waypoint server, order tracker) via captured
-// lambdas -- this keeps BT.CPP's plugin API happy while letting our nodes
-// use real ROS objects instead of globals.
+
 void registerCafeButlerNodes(
   BT::BehaviorTreeFactory & factory,
   rclcpp::Node::SharedPtr node,
   std::shared_ptr<WaypointServer> waypoints,
   std::shared_ptr<OrderTracker> tracker);
 
-}  // namespace cafe_butler_bt
+}  

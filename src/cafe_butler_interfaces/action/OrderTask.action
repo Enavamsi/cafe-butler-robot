@@ -1,6 +1,6 @@
-# Goal: a set of tables to serve in one "order" (1..N tables)
-string[] tables            # e.g. ["table1"] or ["table1","table2","table3"]
-string order_id            # free-form id for logging/feedback
+# Goal:
+string[] tables           
+string order_id            
 ---
 # Result
 bool success
@@ -9,5 +9,5 @@ string[] skipped_tables
 string message
 ---
 # Feedback
-string state                # e.g. "MOVING_TO_KITCHEN","WAITING_KITCHEN_CONFIRM","MOVING_TO_TABLE1",...
+string state                
 string current_table

@@ -8,11 +8,7 @@
 namespace cafe_butler_bt
 {
 
-// Reads waypoints from ROS params of the form:
-//   waypoints.<name>.x / .y / .yaw
-// declared in config/waypoints.yaml. Adding table4, table5, ... later is a
-// config change only -- no code or BT-tree change needed.
-class WaypointServer
+
 {
 public:
   explicit WaypointServer(const rclcpp::Node::SharedPtr & node)
@@ -45,8 +41,7 @@ private:
     auto names = node_->get_parameter("waypoint_names").as_string_array();
 
     for (const auto & name : names) {
-      // "position" is [x, y] ; "orientation" is the full quaternion [x, y, z, w]
-      // -- matches the waypoints.yaml layout (position/orientation arrays).
+
       node_->declare_parameter<std::vector<double>>(
         "waypoints." + name + ".position", std::vector<double>{0.0, 0.0});
       node_->declare_parameter<std::vector<double>>(

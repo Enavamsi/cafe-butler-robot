@@ -8,14 +8,7 @@
 namespace cafe_butler_bt
 {
 
-// Central, thread-safe place that remembers:
-//  - which locations ("kitchen", "table1", "table2", "table3") have been
-//    confirmed by a person pressing a button on the GUI
-//  - which tables (or "all") have been cancelled
-//
-// This is the ONLY thing that talks to the /confirmation and /cancel_order
-// topics. BT leaf nodes just poll this object, so the tree itself has no
-// ROS-callback code in it -- keeps it generic and testable.
+
 class OrderTracker
 {
 public:
@@ -51,7 +44,7 @@ public:
     return cancelled_.count(table) > 0 || cancelled_.count("all") > 0;
   }
 
-  // Reset state at the start of a new order / before waiting on a location again
+
   void clearConfirmation(const std::string & location)
   {
     std::lock_guard<std::mutex> lock(mutex_);
@@ -77,4 +70,4 @@ private:
   std::set<std::string> cancelled_;
 };
 
-}  // namespace cafe_butler_bt
+}

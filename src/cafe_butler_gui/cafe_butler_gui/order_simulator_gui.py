@@ -1,19 +1,3 @@
-#!/usr/bin/env python3
-"""
-Small GUI that stands in for the humans in the milestone descriptions:
-  - the HOST placing an order for one or more tables
-  - the KITCHEN staff pressing "confirm" once food is handed to the robot
-  - the CUSTOMER at a table pressing "confirm" once food is received
-  - anyone hitting "cancel" for a specific table or the whole order
-
-It only ever does two things on the ROS side:
-  1. sends an OrderTask action goal to /butler_order  (the host's order)
-  2. publishes std_msgs/String on /confirmation and /cancel_order
-     (everything else)
-
-This mirrors real inputs (buttons/screen taps) closely enough to exercise
-every milestone without needing real customers or kitchen staff.
-"""
 import threading
 import tkinter as tk
 from tkinter import ttk
@@ -162,5 +146,3 @@ def main():
         rclpy.shutdown()
 
 
-if __name__ == "__main__":
-    main()

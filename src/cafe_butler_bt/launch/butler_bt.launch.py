@@ -22,7 +22,7 @@ def generate_launch_description():
 
     milestone_arg = DeclareLaunchArgument(
         'milestone',
-        default_value='milestone1_basic_delivery',
+        default_value='m1',
         description=(
             'Which BT xml (without .xml) to run, e.g. '
             'milestone1_basic_delivery ... milestone7_skip_cancelled_table, '
